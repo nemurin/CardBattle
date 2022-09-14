@@ -7,7 +7,10 @@
 [Bb]uild/
 [Bb]uilds/
 Assets/AssetStoreTools*
-Assets/TextMesh Pro*
+CardBattle/Assets/TextMesh Pro*
+CardBattle/ProjectSettings*
+CardBattle/Packages*
+CardBattle/.vscode*
  
 
 # Visual Studio cache directory
