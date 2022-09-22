@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Card : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class Card : MonoBehaviour
     //効果説明
     [TextArea]
     [SerializeField] public string description;
+
+    public CardBase Base{get; private set;}
+
+    public UnityAction<Card> OnClickCard;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +37,7 @@ public class Card : MonoBehaviour
         
     }
     public void Set(CardBase cardBase){
+        Base = cardBase;
         icon.sprite=cardBase.icon;
         name = cardBase.name;
         category = cardBase.category;
@@ -39,5 +45,8 @@ public class Card : MonoBehaviour
         power = cardBase.power;
         cost = cardBase.cost;
         description = cardBase.description;
+    }
+    public void OnClick(){
+        OnClickCard?.Invoke(this);
     }
 }

@@ -21,4 +21,12 @@ public class Battler : MonoBehaviour
         playerTextObject.text=""+playerHp;
     }
     public BattlerHand Hand { get => hand; }
+
+    public void SetCardToHand(Card card){
+        hand.Add(card);
+        card.OnClickCard = SelectedCard;
+    }
+    void SelectedCard(Card card){
+        Debug.Log(card.Base.name);
+    }
 }
