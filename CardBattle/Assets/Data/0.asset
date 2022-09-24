@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21691a9d91032694d85928dbc3799835, type: 3}
   m_Name: 0
   m_EditorClassIdentifier: 
-  name: 
+  name: 1
   category: 
   type: 
   power: 0
-  cost: 0
+  cost: 2
   icon: {fileID: 21300000, guid: 21c2b7343562436459c348b505e2c062, type: 3}
   description: 
