@@ -22,4 +22,10 @@ public class BattlerHand : MonoBehaviour
     public void Remove(Card card){
         list.Remove(card);
     }
+    public Card RandomRemove(){
+        int r = Random.Range(0,list.Count);
+        Card card = list[r];
+        Remove(card);
+        return card;
+    }
 }

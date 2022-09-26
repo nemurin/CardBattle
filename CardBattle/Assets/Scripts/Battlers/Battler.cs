@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class Battler : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Battler : MonoBehaviour
     [SerializeField] TextMeshProUGUI playerTextObject;
     [SerializeField] BattlerHand hand;
     [SerializeField] SubmitPosition SubmitPosition;
+    public UnityAction OnSubmitAction;
+    public bool isSubmitted;
 
     // Start is called before the first frame update
     void Start()
@@ -30,11 +33,24 @@ public class Battler : MonoBehaviour
         card.OnClickCard = SelectedCard;
     }
     void SelectedCard(Card card){
+        if(isSubmitted)return;
         if(don>0){
         SubmitPosition.Set(card);
         hand.Remove(card);
         Debug.Log(card.Base.name);
         don=don-card.cost;
         }
+    }
+    public void OnSubmitButton(){
+        // GameMasterに通知
+        isSubmitted=true;
+        OnSubmitAction?.Invoke();
+    }
+    public void RandomSubmit(){
+        //手札からランダムでカードを抜き取る
+        Card card = hand.RandomRemove();
+        SubmitPosition.Set(card);
+        isSubmitted=true;
+        OnSubmitAction?.Invoke();
     }
 }
