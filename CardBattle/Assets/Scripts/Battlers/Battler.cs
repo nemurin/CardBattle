@@ -27,6 +27,7 @@ public class Battler : MonoBehaviour
         playerTextObject.text=""+playerHp+"DON"+don;
     }
     public BattlerHand Hand { get => hand; }
+    public Card SubmitCard {get=>SubmitPosition.SubmitCard;}
 
     public void SetCardToHand(Card card){
         hand.Add(card);
@@ -52,5 +53,9 @@ public class Battler : MonoBehaviour
         SubmitPosition.Set(card);
         isSubmitted=true;
         OnSubmitAction?.Invoke();
+    }
+    public void SetupNextTurn(){
+        SubmitPosition.DeleteCard();
+        isSubmitted=false;
     }
 }
