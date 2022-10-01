@@ -8,6 +8,7 @@ public class GameMaster : MonoBehaviour
     [SerializeField] Battler enemy;
     [SerializeField] CardGenerator CardGenerator;
     [SerializeField] GameObject submitButton;
+    [SerializeField] GameUI gameUI;
     RuleBook ruleBook;
     public void Awake(){
         ruleBook = GetComponent<RuleBook>();
@@ -25,6 +26,7 @@ public class GameMaster : MonoBehaviour
     }
     //カードを生成して配る
     void Setup(){
+        gameUI.Init();
         player.OnSubmitAction = SubmittedAction;
         enemy.OnSubmitAction = SubmittedAction;
         SendCardsTo(player,-80);
@@ -52,11 +54,21 @@ public class GameMaster : MonoBehaviour
     IEnumerator CardsBattle(){
         yield return new WaitForSeconds(1f);
         Result result = ruleBook.GetResult(player,enemy);
+        if(result==Result.TurnWin
+        ||result==Result.GameWin){
+            gameUI.ShowTurnResult("WIN");}
+        else if(result==Result.TurnLose
+        ||result==Result.GameLose){
+            gameUI.ShowTurnResult("LOSE");}
+        else if(result==Result.TurnDraw){
+            gameUI.ShowTurnResult("Draw");
+        }
         SetupNextTurn();
     }
     void SetupNextTurn(){
         player.SetupNextTurn();
         enemy.SetupNextTurn();
+        //gameUI.Init();
         submitButton.SetActive(true);
     }
 }
