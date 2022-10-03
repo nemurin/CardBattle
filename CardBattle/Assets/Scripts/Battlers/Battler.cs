@@ -13,6 +13,7 @@ public class Battler : MonoBehaviour
     [SerializeField] SubmitPosition SubmitPosition;
     public UnityAction OnSubmitAction;
     public bool isSubmitted;
+    public int Life;
 
     // Start is called before the first frame update
     void Start()

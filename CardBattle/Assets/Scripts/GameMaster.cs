@@ -27,6 +27,9 @@ public class GameMaster : MonoBehaviour
     //カードを生成して配る
     void Setup(){
         gameUI.Init();
+        player.Life = 5;
+        enemy.Life = 5;
+        gameUI.ShowLifes(player.Life,enemy.Life);
         player.OnSubmitAction = SubmittedAction;
         enemy.OnSubmitAction = SubmittedAction;
         SendCardsTo(player,-80);
@@ -56,13 +59,16 @@ public class GameMaster : MonoBehaviour
         Result result = ruleBook.GetResult(player,enemy);
         if(result==Result.TurnWin
         ||result==Result.GameWin){
-            gameUI.ShowTurnResult("WIN");}
+            gameUI.ShowTurnResult("WIN");
+            enemy.Life--;}
         else if(result==Result.TurnLose
         ||result==Result.GameLose){
-            gameUI.ShowTurnResult("LOSE");}
+            gameUI.ShowTurnResult("LOSE");
+            player.Life--;}
         else if(result==Result.TurnDraw){
             gameUI.ShowTurnResult("Draw");
         }
+        gameUI.ShowLifes(player.Life,enemy.Life);
         SetupNextTurn();
     }
     void SetupNextTurn(){
