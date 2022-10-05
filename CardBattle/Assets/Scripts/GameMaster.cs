@@ -67,9 +67,28 @@ public class GameMaster : MonoBehaviour
             player.Life--;}
         else if(result==Result.TurnDraw){
             gameUI.ShowTurnResult("Draw");
+            enemy.Life-=5;
         }
         gameUI.ShowLifes(player.Life,enemy.Life);
-        SetupNextTurn();
+        if(player.Life<=0||enemy.Life<=0)
+        {
+            ShowResult(result);
+        }
+        else
+        {
+            SetupNextTurn();
+        }
+    }
+    void ShowResult(Result result){
+        if(player.Life<=0&&enemy.Life<=0){
+            gameUI.ShowGameResult("DRAW");
+        }
+        else if(player.Life<=0){
+            gameUI.ShowGameResult("LOSE");
+        }
+        else if(enemy.Life<=0){
+            gameUI.ShowGameResult("WIN");
+        }
     }
     void SetupNextTurn(){
         player.SetupNextTurn();
